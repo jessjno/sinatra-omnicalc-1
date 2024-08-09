@@ -34,6 +34,23 @@ get("/square_root/results") do
   erb(:square_root_result)
 end
 
+get("/payment/new") do
+  erb(:new_payment_calc)
+end
+
+get("/payment/results") do
+  @rate = ((params.fetch("annual_percentage_rate").to_f / 100) / 12)
+  @number_of_years_remaining= params.fetch("number_of_periods_remaining").to_i * 12
+  @present_value = params.fetch("principal").to_f  
+  
+  @numerator = rate * present_value
+  @denominator = (1 - (1 + rate) ** number_of_years_remaining)
+
+  @the_result = @numerator / @denominator
+
+  erb(:payment_result)
+end
+
 get("/random/new") do
   erb(:random_nums)
 end
