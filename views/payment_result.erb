@@ -7,28 +7,28 @@
     APR
   </dt>
   <dd>
-    <%= @rate %>
+    <%= ((@rate * 100) * 12).to_fs(:percentage, {:precision => 4}) %>
   </dd>
 
   <dt>
     Number of years
   </dt>
   <dd>
-    <%= @number_of_years_remaining %>
+    <%= @number_of_years_remaining / 12 %>
   </dd>
 
   <dt>
     Principal
   </dt>
   <dd>
-    <%= @present_value %>
+    <%= @present_value.to_fs(:currency) %>
   </dd>
 
   <dt>
     Payment
   </dt>
   <dd>
-    <%= @the_result %>
+    <%= @the_result.to_fs(:currency) %>
   </dd>
 </dl>
 

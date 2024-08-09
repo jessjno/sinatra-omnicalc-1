@@ -43,8 +43,8 @@ get("/payment/results") do
   @number_of_years_remaining= params.fetch("number_of_periods_remaining").to_i * 12
   @present_value = params.fetch("principal").to_f  
   
-  @numerator = rate * present_value
-  @denominator = (1 - (1 + rate) ** number_of_years_remaining)
+  @numerator = @rate * @present_value
+  @denominator = (1 - (1 + @rate) ** -(@number_of_years_remaining))
 
   @the_result = @numerator / @denominator
 
@@ -52,13 +52,13 @@ get("/payment/results") do
 end
 
 get("/random/new") do
-  erb(:random_nums)
+  erb(:random_nums_calc)
 end
 
 get("/random/results") do
-  @the_min = params.fetch("first_number").to_i
+  @the_min = params.fetch("first_number").to_f
   
-  @the_max = params.fetch("second_number").to_i
+  @the_max = params.fetch("second_number").to_f
 
   @the_result = rand(@the_min..@the_max)
 
